@@ -84,46 +84,66 @@ export default async function AsIaPage({ params }: { params: Promise<{ id: strin
       </div>
 
       {/* AI Enhanced Flow */}
-      <div className="space-y-6">
-        <h2 className="text-xl font-semibold flex items-center gap-2">
-          <Bot className="w-5 h-5 text-purple-500" /> Flujo Automatizado
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          {process.asIa.steps.map((step, index) => (
-            <div key={step.id} className="relative group">
-              {index < process.asIa.steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 right-0 w-full h-0.5 bg-border -z-10 translate-x-1/2"></div>
-              )}
-              
-              <div className={`
-                h-full p-4 rounded-xl border transition-all duration-300
-                ${step.type === 'ai' 
-                  ? 'bg-purple-500/5 border-purple-500/30 hover:bg-purple-500/10 hover:shadow-lg hover:shadow-purple-500/10' 
-                  : 'bg-card border-border hover:border-primary/50'
-                }
-              `}>
-                <div className="flex justify-between items-start mb-3">
-                  <span className="text-xs font-mono text-muted-foreground">0{index + 1}</span>
-                  {step.type === 'ai' && <Sparkles className="w-4 h-4 text-purple-500 animate-pulse" />}
-                </div>
+      <div className="rounded-xl border bg-card/50 overflow-hidden">
+        <div className="p-4 border-b bg-muted/30 flex justify-between items-center">
+          <h3 className="font-semibold flex items-center gap-2">
+            <Bot className="w-5 h-5 text-purple-500" /> Flujo Automatizado
+          </h3>
+        </div>
+        <div className="p-8 relative">
+          {/* Vertical Timeline */}
+          <div className="absolute left-8 top-8 bottom-8 w-0.5 bg-border md:left-1/2 md:-ml-0.5"></div>
+          
+          <div className="space-y-8 relative">
+            {process.asIa.steps.map((step, index) => (
+              <div key={step.id} className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                 
-                <h4 className="font-bold text-sm mb-2">{step.label}</h4>
-                <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                  {step.description}
-                </p>
-
-                <div className="flex items-center gap-2 mt-auto pt-2 border-t border-dashed border-border/50">
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${
-                    step.type === 'ai' ? 'bg-purple-500 text-white border-transparent' : 'bg-muted text-muted-foreground border-border'
-                  }`}>
-                    {step.type === 'ai' ? 'AGENTE IA' : step.role}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground ml-auto">{step.duration}m</span>
+                {/* Content Side */}
+                <div className={`flex-1 w-full md:w-1/2 p-6 rounded-xl border shadow-sm transition-all duration-300 ${
+                  step.type === 'ai' 
+                    ? 'bg-purple-500/5 border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10' 
+                    : 'bg-card border-border hover:border-primary/50'
+                }`}>
+                  <div className="flex items-start justify-between mb-2">
+                    <span className="font-mono text-xs text-muted-foreground">Paso {index + 1}</span>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
+                      step.type === 'ai' ? 'bg-purple-500 text-white border-transparent' : 
+                      step.type === 'system' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
+                      'bg-muted text-muted-foreground border-border'
+                    }`}>
+                      {step.type === 'ai' ? 'AGENTE IA' : step.role}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="font-bold text-lg">{step.label}</h4>
+                    {step.type === 'ai' && <Sparkles className="w-4 h-4 text-purple-500 animate-pulse" />}
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground mb-4">{step.description}</p>
+                  
+                  <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground border-t pt-3 border-dashed border-border/50">
+                    <div className="flex items-center gap-1">
+                      {step.type === 'ai' ? <Bot className="w-3 h-3" /> : <Zap className="w-3 h-3" />}
+                      {step.type === 'ai' ? 'Automático' : step.role}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {step.duration} min
+                    </div>
+                  </div>
                 </div>
+
+                {/* Center Point */}
+                <div className={`absolute left-8 md:left-1/2 w-4 h-4 rounded-full border-4 border-background -translate-x-1/2 z-10 ${
+                  step.type === 'ai' ? 'bg-purple-500' : 'bg-primary'
+                }`}></div>
+
+                {/* Empty Side for layout balance */}
+                <div className="flex-1 hidden md:block"></div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
