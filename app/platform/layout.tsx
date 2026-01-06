@@ -15,7 +15,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarSeparator,
   SidebarTrigger,
   SidebarGroup,
   SidebarGroupLabel,
@@ -28,9 +27,6 @@ import {
 import {
   LayoutDashboard,
   UploadCloud,
-  FileSearch,
-  Bot,
-  LineChart,
   Settings,
   List,
   ChevronRight,
@@ -49,19 +45,18 @@ export default function PlatformLayout({
       <SidebarProvider>
         <Sidebar side="left" variant="sidebar" collapsible="icon">
           
-          {/* CAMBIO 1: Ajusté el padding inferior a 0 (pb-0) para subir los elementos */}
+          {/* Header ajustado para que suba los íconos */}
           <SidebarHeader className="flex items-center gap-2 px-3 pt-2 pb-0">
             <SidebarTrigger />
             <div className="ml-1 font-semibold text-primary">ASAI</div>
           </SidebarHeader>
 
           <SidebarContent>
+            {/* GRUPO: Plataforma */}
             <SidebarGroup>
-              {/* CAMBIO 2: Esta clase oculta el texto Y SU ESPACIO solo cuando la barra está cerrada */}
               <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden">
                 Plataforma
               </SidebarGroupLabel>
-              
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -76,12 +71,11 @@ export default function PlatformLayout({
               </SidebarGroupContent>
             </SidebarGroup>
 
+            {/* GRUPO: Gestión de Procesos */}
             <SidebarGroup>
-              {/* CAMBIO 3: Aplicado lo mismo aquí para mantener consistencia */}
               <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden">
                 Gestión de Procesos
               </SidebarGroupLabel>
-              
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -136,11 +130,14 @@ export default function PlatformLayout({
           <SidebarRail />
         </Sidebar>
 
-        <SidebarInset>
-          <div className="flex-1 w-full min-w-0">
+        {/* --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE --- */}
+        {/* SidebarInset empuja el contenido. El <main> con p-6 le da aire al contenido */}
+        <SidebarInset className="overflow-x-hidden">
+          <main className="flex-1 w-full min-w-0 p-6 pt-6 overflow-y-auto">
             {children}
-          </div>
+          </main>
         </SidebarInset>
+        
       </SidebarProvider>
     </div>
   )
