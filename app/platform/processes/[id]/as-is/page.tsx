@@ -21,7 +21,7 @@ export default async function AsIsPage({ params }: { params: Promise<{ id: strin
           </p>
         </div>
         <Link
-          href={`/platform/processes/${process.id}/as-ia`}
+          href={`/platform/processes/${process.id}/as-ai`}
           className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-all shadow-lg shadow-primary/20"
         >
           Ver Optimización IA <ArrowRight className="w-4 h-4" />
@@ -29,12 +29,18 @@ export default async function AsIsPage({ params }: { params: Promise<{ id: strin
       </div>
 
       {/* Metrics Summary */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="p-4 rounded-xl bg-card border shadow-sm">
           <div className="flex items-center gap-2 text-muted-foreground mb-1">
-            <Clock className="w-4 h-4" /> <span className="text-xs font-medium uppercase">Tiempo Total</span>
+            <Clock className="w-4 h-4" /> <span className="text-xs font-medium uppercase">Horas Operativas (HH)</span>
           </div>
-          <div className="text-2xl font-bold">{process.asIs.metrics.totalTime} min</div>
+          <div className="text-2xl font-bold">{(process.asIs.metrics.operationalTime / 60).toFixed(1)} h</div>
+        </div>
+        <div className="p-4 rounded-xl bg-card border shadow-sm">
+          <div className="flex items-center gap-2 text-muted-foreground mb-1">
+            <Clock className="w-4 h-4" /> <span className="text-xs font-medium uppercase">Tiempo Total (E2E)</span>
+          </div>
+          <div className="text-2xl font-bold">{(process.asIs.metrics.totalTime / 60).toFixed(1)} h</div>
         </div>
         <div className="p-4 rounded-xl bg-card border shadow-sm">
           <div className="flex items-center gap-2 text-muted-foreground mb-1">

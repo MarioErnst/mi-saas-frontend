@@ -1,11 +1,13 @@
 import { DUMMY_PROCESSES } from "@/lib/dummy-data"
-import { ArrowRight, BarChart3, Download, Share2, Target, TrendingUp, Trophy } from "lucide-react"
+import { ArrowRight, BarChart3, Clock, Download, Share2, Target, Timer, TrendingUp, Trophy } from "lucide-react"
 import Link from "next/link"
 
 export default async function ResultsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const process = DUMMY_PROCESSES.find(p => p.id === id) || DUMMY_PROCESSES[0]
   const roi = process.asIa.roi
+  const metrics = process.asIa.metrics
+  const asIsMetrics = process.asIs.metrics
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -46,20 +48,36 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
           </div>
           
           <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Clock className="w-12 h-12 text-green-500" />
+              </div>
+              <p className="text-sm text-gray-400 mb-1">Eficiencia HH</p>
+              <p className="text-2xl font-bold text-green-400">+{metrics.efficiencyHH?.toFixed(1)}%</p>
+              <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                {(metrics.operationalTime / 60).toFixed(1)}h <span className="text-gray-600">vs</span> {(asIsMetrics.operationalTime / 60).toFixed(1)}h
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Timer className="w-12 h-12 text-green-500" />
+              </div>
+              <p className="text-sm text-gray-400 mb-1">Eficiencia E2E</p>
+              <p className="text-2xl font-bold text-green-400">+{metrics.efficiencyE2E?.toFixed(1)}%</p>
+              <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                {(metrics.totalTime / 60).toFixed(1)}h <span className="text-gray-600">vs</span> {(asIsMetrics.totalTime / 60).toFixed(1)}h
+              </p>
+            </div>
+
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
               <p className="text-sm text-gray-400 mb-1">Punto de Equilibrio</p>
               <p className="text-2xl font-bold text-white">{roi.breakevenPoint}</p>
             </div>
+            
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
-              <p className="text-sm text-gray-400 mb-1">Eficiencia Operativa</p>
-              <p className="text-2xl font-bold text-green-400">+{roi.timeReductionPercentage}%</p>
-            </div>
-            <div className="col-span-2 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-400">Costo de Implementación</p>
-                <p className="text-xl font-bold text-white">Bajo Demanda</p>
-              </div>
-              <TrendingUp className="w-8 h-8 text-blue-500 opacity-50" />
+              <p className="text-sm text-gray-400 mb-1">Costo Implementación</p>
+              <p className="text-xl font-bold text-white">Bajo Demanda</p>
             </div>
           </div>
         </div>
@@ -138,7 +156,7 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
                {/* Month 6 */}
             </div>
             <div className="w-1/4 bg-green-500/20 rounded-t-lg h-[15%] relative group">
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-green-500">AS-IA</div>
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-green-500">AS-AI</div>
             </div>
             
             {/* Chart Labels */}

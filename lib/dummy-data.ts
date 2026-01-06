@@ -9,9 +9,12 @@ export interface ProcessStep {
 }
 
 export interface ProcessMetrics {
-  totalTime: number; // in minutes
+  operationalTime: number; // HH - Active working time in minutes
+  totalTime: number;       // E2E - Total elapsed time in minutes
   costPerExecution: number; // in USD
-  efficiencyScore: number; // 0-100
+  efficiencyScore: number; // 0-100 (Overall Score)
+  efficiencyHH?: number; // % improvement in Operational Hours
+  efficiencyE2E?: number; // % improvement in End-to-End Time
   headcount: number;
 }
 
@@ -54,7 +57,8 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
         { id: "s5", label: "Creación de Cuenta", role: "Sistemas", duration: 10, type: "system", description: "Script nocturno de alta." },
       ],
       metrics: {
-        totalTime: 430, // minutes
+        operationalTime: 430, // ~7 hours active
+        totalTime: 4320, // 3 days E2E
         costPerExecution: 150,
         efficiencyScore: 45,
         headcount: 4
@@ -69,9 +73,12 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
         { id: "s5", label: "Aprobación Humana (Excepciones)", role: "Finanzas", duration: 15, type: "human", description: "Solo revisa casos con score bajo." },
       ],
       metrics: {
-        totalTime: 18.2, // minutes
+        operationalTime: 18.2,
+        totalTime: 25, // E2E slight overhead
         costPerExecution: 5,
         efficiencyScore: 98,
+        efficiencyHH: 95.7, // (430 - 18.2) / 430 * 100
+        efficiencyE2E: 99.4, // (4320 - 25) / 4320 * 100
         headcount: 1
       },
       roi: {
@@ -96,7 +103,8 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
         { id: "r4", label: "Programación de Pago", role: "Tesorería", duration: 20, type: "system" },
       ],
       metrics: {
-        totalTime: 200,
+        operationalTime: 200,
+        totalTime: 2880, // 2 days
         costPerExecution: 45,
         efficiencyScore: 30,
         headcount: 3
@@ -110,9 +118,12 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
         { id: "r4", label: "Pago Inmediato", role: "API Bancaria", duration: 1, type: "system" },
       ],
       metrics: {
-        totalTime: 3.5,
+        operationalTime: 3.5,
+        totalTime: 5,
         costPerExecution: 2,
         efficiencyScore: 95,
+        efficiencyHH: 98.2, // (200 - 3.5) / 200 * 100
+        efficiencyE2E: 99.8, // (2880 - 5) / 2880 * 100
         headcount: 0
       },
       roi: {
@@ -131,11 +142,11 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
     lastUpdated: "2024-02-28",
     asIs: {
       steps: [],
-      metrics: { totalTime: 0, costPerExecution: 0, efficiencyScore: 0, headcount: 0 }
+      metrics: { operationalTime: 0, totalTime: 0, costPerExecution: 0, efficiencyScore: 0, headcount: 0 }
     },
     asIa: {
       steps: [],
-      metrics: { totalTime: 0, costPerExecution: 0, efficiencyScore: 0, headcount: 0 },
+      metrics: { operationalTime: 0, totalTime: 0, costPerExecution: 0, efficiencyScore: 0, headcount: 0 },
       roi: { savings: 0, timeReductionPercentage: 0, annualSavings: 0, breakevenPoint: "N/A" }
     }
   }
