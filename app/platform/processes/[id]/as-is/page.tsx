@@ -1,5 +1,5 @@
 import { DUMMY_PROCESSES } from "@/lib/dummy-data"
-import { ArrowRight, Clock, Users, User, Monitor, AlertCircle } from "lucide-react"
+import { ArrowRight, Clock, Users, User, Monitor, AlertCircle, FileInput, FileOutput, Database, Layers } from "lucide-react"
 import Link from "next/link"
 
 export default async function AsIsPage({ params }: { params: Promise<{ id: string }> }) {
@@ -90,6 +90,45 @@ export default async function AsIsPage({ params }: { params: Promise<{ id: strin
                   <h4 className="font-bold text-lg mb-1">{step.label}</h4>
                   <p className="text-sm text-muted-foreground mb-4">{step.description}</p>
                   
+                  {/* Detailed Input/Output/Systems */}
+                  <div className="grid grid-cols-1 gap-2 mb-4 p-3 bg-muted/20 rounded-lg text-xs">
+                    {(step.input || step.output) && (
+                      <div className="grid grid-cols-2 gap-2">
+                        {step.input && (
+                          <div className="flex flex-col gap-1">
+                            <span className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-1">
+                              <FileInput className="w-3 h-3" /> Input
+                            </span>
+                            <span className="font-medium text-foreground">{step.input}</span>
+                          </div>
+                        )}
+                        {step.output && (
+                          <div className="flex flex-col gap-1">
+                            <span className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-1">
+                              <FileOutput className="w-3 h-3" /> Output
+                            </span>
+                            <span className="font-medium text-foreground">{step.output}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    
+                    {step.systems && step.systems.length > 0 && (
+                      <div className="flex flex-col gap-1 mt-1 pt-2 border-t border-border/50">
+                        <span className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-1">
+                          <Database className="w-3 h-3" /> Sistemas / Plataformas
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {step.systems.map((sys, i) => (
+                            <span key={i} className="px-1.5 py-0.5 bg-background border rounded text-[10px] font-medium flex items-center gap-1">
+                              <Layers className="w-2.5 h-2.5 text-muted-foreground" /> {sys}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
                   <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground border-t pt-3">
                     <div className="flex items-center gap-1">
                       {step.type === 'human' ? <User className="w-3 h-3" /> : <Monitor className="w-3 h-3" />}

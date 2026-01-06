@@ -1,5 +1,5 @@
 import { DUMMY_PROCESSES } from "@/lib/dummy-data"
-import { ArrowRight, Sparkles, Bot, Zap, CheckCircle2, Clock, DollarSign } from "lucide-react"
+import { ArrowRight, Sparkles, Bot, Zap, CheckCircle2, Clock, DollarSign, FileInput, FileOutput, Database, Layers } from "lucide-react"
 import Link from "next/link"
 
 export default async function AsIaPage({ params }: { params: Promise<{ id: string }> }) {
@@ -121,6 +121,51 @@ export default async function AsIaPage({ params }: { params: Promise<{ id: strin
                   </div>
                   
                   <p className="text-sm text-muted-foreground mb-4">{step.description}</p>
+                  
+                  {/* Detailed Input/Output/Systems */}
+                  <div className={`grid grid-cols-1 gap-2 mb-4 p-3 rounded-lg text-xs ${
+                    step.type === 'ai' ? 'bg-purple-500/10 border border-purple-500/10' : 'bg-muted/30 border border-border/30'
+                  }`}>
+                    {(step.input || step.output) && (
+                      <div className="grid grid-cols-2 gap-2">
+                        {step.input && (
+                          <div className="flex flex-col gap-1">
+                            <span className={`text-[10px] uppercase font-bold flex items-center gap-1 ${step.type === 'ai' ? 'text-purple-600 dark:text-purple-400' : 'text-muted-foreground'}`}>
+                              <FileInput className="w-3 h-3" /> Input
+                            </span>
+                            <span className="font-medium text-foreground">{step.input}</span>
+                          </div>
+                        )}
+                        {step.output && (
+                          <div className="flex flex-col gap-1">
+                            <span className={`text-[10px] uppercase font-bold flex items-center gap-1 ${step.type === 'ai' ? 'text-purple-600 dark:text-purple-400' : 'text-muted-foreground'}`}>
+                              <FileOutput className="w-3 h-3" /> Output
+                            </span>
+                            <span className="font-medium text-foreground">{step.output}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    
+                    {step.systems && step.systems.length > 0 && (
+                      <div className={`flex flex-col gap-1 mt-1 pt-2 border-t ${step.type === 'ai' ? 'border-purple-500/20' : 'border-border/50'}`}>
+                        <span className={`text-[10px] uppercase font-bold flex items-center gap-1 ${step.type === 'ai' ? 'text-purple-600 dark:text-purple-400' : 'text-muted-foreground'}`}>
+                          <Database className="w-3 h-3" /> Sistemas / Plataformas
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {step.systems.map((sys, i) => (
+                            <span key={i} className={`px-1.5 py-0.5 border rounded text-[10px] font-medium flex items-center gap-1 ${
+                              step.type === 'ai' 
+                                ? 'bg-purple-500/10 border-purple-500/20 text-purple-700 dark:text-purple-300' 
+                                : 'bg-background border-border text-foreground'
+                            }`}>
+                              <Layers className="w-2.5 h-2.5 opacity-70" /> {sys}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   
                   <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground border-t pt-3 border-dashed border-border/50">
                     <div className="flex items-center gap-1">
