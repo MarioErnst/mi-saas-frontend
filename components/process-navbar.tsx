@@ -18,7 +18,7 @@ export function ProcessNavbar() {
     },
     {
       label: "Optimización IA (AS-AI)",
-      href: `/platform/processes/${processId}/as-ia`,
+      href: `/platform/processes/${processId}/as-ai`,
       icon: Bot,
     },
     {

@@ -1,8 +1,8 @@
 import { DUMMY_PROCESSES } from "@/lib/dummy-data"
-import { ArrowRight, Sparkles, Bot, Zap, CheckCircle2, Clock, DollarSign, FileInput, FileOutput, Database, Layers } from "lucide-react"
+import { ArrowRight, Sparkles, Bot, Zap, CheckCircle2, Clock, DollarSign, FileInput, FileOutput, Database, Layers, Network, Server, Code2, CreditCard, Info, Cpu } from "lucide-react"
 import Link from "next/link"
 
-export default async function AsIaPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function AsAiPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const process = DUMMY_PROCESSES.find(p => p.id === id) || DUMMY_PROCESSES[0]
 
@@ -212,6 +212,101 @@ export default async function AsIaPage({ params }: { params: Promise<{ id: strin
           </div>
         </div>
       </div>
+
+      {/* Technical Architecture Diagram */}
+      <div className="rounded-xl border bg-card/50 overflow-hidden">
+        <div className="p-4 border-b bg-muted/30 flex justify-between items-center">
+          <h3 className="font-semibold flex items-center gap-2">
+            <Network className="w-5 h-5 text-blue-500" /> Arquitectura Técnica
+
+          </h3>
+        </div>
+        <div className="p-8 bg-background/50">
+          <div className="w-full aspect-video min-h-[400px] bg-muted/20 rounded-lg border-2 border-dashed border-muted-foreground/20 flex flex-col items-center justify-center text-muted-foreground gap-4 overflow-hidden relative group">
+             {process.asIa.technicalDiagram ? (
+               <div className="relative w-full h-full flex items-center justify-center p-4">
+                  {/* In a real app, use next/image. Here using img for external/placeholder URL */}
+                  <img 
+                    src={process.asIa.technicalDiagram} 
+                    alt="Arquitectura Técnica" 
+                    className="max-w-full max-h-full object-contain rounded shadow-lg" 
+                  />
+               </div>
+             ) : (
+               <>
+                  <Server className="w-16 h-16 opacity-20" />
+                  <p>Diagrama técnico no disponible</p>
+                  <p className="text-xs opacity-60">Pegar imagen aquí (Futura implementación)</p>
+               </>
+             )}
+          </div>
+        </div>
+      </div>
+
+      {/* Solution Details */}
+      {process.asIa.solutionDetails && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="p-6 rounded-xl border bg-card shadow-sm">
+            <h3 className="font-semibold mb-4 flex items-center gap-2">
+              <Code2 className="w-5 h-5 text-purple-500" /> Stack Tecnológico
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+                  <Cpu className="w-4 h-4" /> Tecnologías
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {process.asIa.solutionDetails.technologies.map((tech, i) => (
+                    <span key={i} className="px-2 py-1 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-medium border border-purple-500/20">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+                  <Server className="w-4 h-4" /> Infraestructura
+                </h4>
+                <ul className="list-disc list-inside text-sm text-foreground/80 space-y-1">
+                  {process.asIa.solutionDetails.infrastructure.map((inf, i) => (
+                    <li key={i}>{inf}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div className="p-6 rounded-xl border bg-card shadow-sm">
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-blue-500" /> Licencias y Costos
+              </h3>
+              <ul className="space-y-2">
+                {process.asIa.solutionDetails.licenses.map((lic, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm">
+                    <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
+                    <span>{lic}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="p-6 rounded-xl border bg-amber-500/5 border-amber-500/20 shadow-sm">
+              <h3 className="font-semibold mb-2 flex items-center gap-2 text-amber-600 dark:text-amber-500">
+                <Info className="w-5 h-5" /> Notas de Implementación
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {process.asIa.solutionDetails.notes}
+              </p>
+              
+              <div className="mt-4 pt-4 border-t border-amber-500/10">
+                 <p className="text-xs text-muted-foreground italic">
+                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

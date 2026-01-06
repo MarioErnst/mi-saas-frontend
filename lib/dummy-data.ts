@@ -41,6 +41,13 @@ export interface ProcessAnalysis {
       breakevenPoint: string; // e.g. "3 months"
       annualSavings: number;
     };
+    technicalDiagram?: string;
+    solutionDetails?: {
+      technologies: string[];
+      licenses: string[];
+      infrastructure: string[];
+      notes: string;
+    };
   };
 }
 
@@ -189,6 +196,13 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
         timeReductionPercentage: 95.7,
         annualSavings: 520000, // Assuming volume
         breakevenPoint: "2.5 meses"
+      },
+      technicalDiagram: "/dcv.png",
+      solutionDetails: {
+        technologies: ["OpenAI GPT-4o API", "LangChain Framework", "Python FastAPI", "React Frontend"],
+        licenses: ["Azure OpenAI Service (Pay-per-token)", "SaaS Platform Subscription", "Zapier Pro Plan"],
+        infrastructure: ["Cloud Hosted (AWS/Azure)", "Docker Containers", "PostgreSQL Database"],
+        notes: "La solución requiere una configuración inicial de 2 semanas para ajustar los prompts del sistema y conectar las APIs de los sistemas legados. Se recomienda un entorno de pruebas previo al despliegue productivo."
       }
     }
   },
