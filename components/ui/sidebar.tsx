@@ -21,7 +21,7 @@ import {
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
+const SIDEBAR_WIDTH = "13rem"
 const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
@@ -201,6 +201,17 @@ const Sidebar = React.forwardRef<
       )
     }
 
+    // Helper to calculate width based on state to avoid Tailwind v4 strict mode issues with complex group-data selectors
+    const getSpacerWidth = () => {
+      if (collapsible === "offcanvas") return 0
+      if (state === "collapsed" && collapsible === "icon") {
+        return variant === "floating" || variant === "inset" 
+          ? "calc(var(--sidebar-width-icon) + 1rem)" 
+          : "var(--sidebar-width-icon)"
+      }
+      return "var(--sidebar-width)"
+    }
+
     return (
       <div
         ref={ref}
@@ -210,15 +221,13 @@ const Sidebar = React.forwardRef<
         data-variant={variant}
         data-side={side}
       >
+        {/* Spacer Div with explicit style width */}
         <div
           className={cn(
-            "duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear",
-            "group-data-[collapsible=offcanvas]:w-0",
+            "duration-200 relative h-svh bg-transparent transition-[width] ease-linear",
             "group-data-[side=right]:rotate-180",
-            variant === "floating" || variant === "inset"
-              ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
           )}
+          style={{ width: getSpacerWidth() }}
         />
         <div
           className={cn(

@@ -2,9 +2,9 @@ import { DUMMY_PROCESSES } from "@/lib/dummy-data"
 import { ArrowRight, Clock, Users, User, Monitor, AlertCircle } from "lucide-react"
 import Link from "next/link"
 
-export default function AsIsPage() {
-  // Hardcoded to show the first process for demo purposes
-  const process = DUMMY_PROCESSES[0]
+export default async function AsIsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const process = DUMMY_PROCESSES.find(p => p.id === id) || DUMMY_PROCESSES[0]
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -21,7 +21,7 @@ export default function AsIsPage() {
           </p>
         </div>
         <Link
-          href="/platform/as-ia"
+          href={`/platform/processes/${process.id}/as-ia`}
           className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-all shadow-lg shadow-primary/20"
         >
           Ver Optimización IA <ArrowRight className="w-4 h-4" />

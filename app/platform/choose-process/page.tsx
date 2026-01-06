@@ -45,7 +45,7 @@ export default function ChooseProcess() {
                 detectados
               </div>
               <Link 
-                href="/platform/as-is" 
+                href={`/platform/processes/${process.id}/as-is`}
                 className="text-sm font-medium text-primary flex items-center gap-1 hover:gap-2 transition-all"
               >
                 Continuar <ArrowRight className="w-4 h-4" />

@@ -1,8 +1,10 @@
 // app/platform/layout.tsx
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { DUMMY_PROCESSES } from "@/lib/dummy-data"
 import {
   SidebarProvider,
   Sidebar,
@@ -18,6 +20,10 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
+  SidebarRail,
 } from "@/components/ui/sidebar"
 import {
   LayoutDashboard,
@@ -27,6 +33,7 @@ import {
   LineChart,
   Settings,
   List,
+  ChevronRight,
 } from "lucide-react"
 
 export default function PlatformLayout({
@@ -35,19 +42,26 @@ export default function PlatformLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+  const [isProcessesOpen, setIsProcessesOpen] = useState(true)
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
       <SidebarProvider>
-        <Sidebar side="left" variant="inset" collapsible="icon">
-          <SidebarHeader className="flex items-center gap-2 px-3 py-2">
+        <Sidebar side="left" variant="sidebar" collapsible="icon">
+          
+          {/* CAMBIO 1: Ajusté el padding inferior a 0 (pb-0) para subir los elementos */}
+          <SidebarHeader className="flex items-center gap-2 px-3 pt-2 pb-0">
             <SidebarTrigger />
-            <div className="ml-1 font-semibold text-primary">Mi SaaS</div>
+            <div className="ml-1 font-semibold text-primary">ASAI</div>
           </SidebarHeader>
 
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel>Plataforma</SidebarGroupLabel>
+              {/* CAMBIO 2: Esta clase oculta el texto Y SU ESPACIO solo cuando la barra está cerrada */}
+              <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden">
+                Plataforma
+              </SidebarGroupLabel>
+              
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -63,16 +77,36 @@ export default function PlatformLayout({
             </SidebarGroup>
 
             <SidebarGroup>
-              <SidebarGroupLabel>Gestión de Procesos</SidebarGroupLabel>
+              {/* CAMBIO 3: Aplicado lo mismo aquí para mantener consistencia */}
+              <SidebarGroupLabel className="group-data-[collapsible=icon]:hidden">
+                Gestión de Procesos
+              </SidebarGroupLabel>
+              
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/platform/choose-process"}>
-                      <Link href="/platform/choose-process" className="flex w-full items-center gap-2">
-                        <List className="size-4" />
-                        <span className="truncate">Mis Procesos</span>
-                      </Link>
+                    <SidebarMenuButton 
+                      onClick={() => setIsProcessesOpen(!isProcessesOpen)} 
+                      isActive={pathname.includes("/platform/processes")}
+                      className="cursor-pointer"
+                    >
+                      <List className="size-4" />
+                      <span className="truncate flex-1">Mis Procesos</span>
+                      <ChevronRight className={`size-4 transition-transform duration-200 ${isProcessesOpen ? "rotate-90" : ""}`} />
                     </SidebarMenuButton>
+                    {isProcessesOpen && (
+                      <SidebarMenuSub>
+                        {DUMMY_PROCESSES.map((process) => (
+                          <SidebarMenuSubItem key={process.id}>
+                            <SidebarMenuSubButton asChild isActive={pathname.includes(`/platform/processes/${process.id}`)}>
+                              <Link href={`/platform/processes/${process.id}/as-is`}>
+                                <span>{process.name}</span>
+                              </Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    )}
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={pathname === "/platform/upload"}>
@@ -85,52 +119,25 @@ export default function PlatformLayout({
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
-
-            <SidebarGroup>
-              <SidebarGroupLabel>Análisis en Curso</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/platform/as-is"}>
-                      <Link href="/platform/as-is" className="flex w-full items-center gap-2">
-                        <FileSearch className="size-4" />
-                        <span className="truncate">Estado Actual (AS-IS)</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/platform/as-ia"}>
-                      <Link href="/platform/as-ia" className="flex w-full items-center gap-2">
-                        <Bot className="size-4" />
-                        <span className="truncate">Optimización IA (AS-IA)</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/platform/results"}>
-                      <Link href="/platform/results" className="flex w-full items-center gap-2">
-                        <LineChart className="size-4" />
-                        <span className="truncate">Resultados & ROI</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
           </SidebarContent>
 
-          <SidebarSeparator />
-
-          <SidebarFooter className="px-3 py-2">
-            <Link href="/platform/settings" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-              <Settings className="size-4" />
-              <span>Configuración</span>
-            </Link>
+          <SidebarFooter>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/platform/settings" className="flex w-full items-center gap-2">
+                    <Settings className="size-4" />
+                    <span className="truncate">Configuración</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
           </SidebarFooter>
+          <SidebarRail />
         </Sidebar>
 
         <SidebarInset>
-          <div className="pt-6 pb-10 px-4 max-w-7xl mx-auto animate-in fade-in zoom-in-95 duration-500">
+          <div className="flex-1 w-full min-w-0">
             {children}
           </div>
         </SidebarInset>

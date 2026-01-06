@@ -2,8 +2,9 @@ import { DUMMY_PROCESSES } from "@/lib/dummy-data"
 import { ArrowRight, Sparkles, Bot, Zap, CheckCircle2, Clock, DollarSign } from "lucide-react"
 import Link from "next/link"
 
-export default function AsIaPage() {
-  const process = DUMMY_PROCESSES[0]
+export default async function AsIaPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const process = DUMMY_PROCESSES.find(p => p.id === id) || DUMMY_PROCESSES[0]
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -20,7 +21,7 @@ export default function AsIaPage() {
           </p>
         </div>
         <Link
-          href="/platform/results"
+          href={`/platform/processes/${process.id}/results`}
           className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-all shadow-lg shadow-purple-500/20"
         >
           Ver Impacto Financiero <ArrowRight className="w-4 h-4" />

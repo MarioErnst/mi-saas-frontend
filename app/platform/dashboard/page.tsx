@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-8">
+    <div className="p-6 max-w-7xl mx-auto space-y-8 animate-in fade-in zoom-in-95 duration-500">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground mt-2">Bienvenido de nuevo. Aquí tienes un resumen de tus procesos de transformación.</p>
@@ -76,7 +76,7 @@ export default function DashboardPage() {
               </div>
 
               <Link 
-                href="/platform/as-is" 
+                href={`/platform/processes/${process.id}/as-is`}
                 className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors bg-primary/10 hover:bg-primary/20 px-4 py-2 rounded-lg"
               >
                 Ver Análisis <ArrowRight className="w-4 h-4" />

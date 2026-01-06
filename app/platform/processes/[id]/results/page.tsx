@@ -2,8 +2,9 @@ import { DUMMY_PROCESSES } from "@/lib/dummy-data"
 import { ArrowRight, BarChart3, Download, Share2, Target, TrendingUp, Trophy } from "lucide-react"
 import Link from "next/link"
 
-export default function ResultsPage() {
-  const process = DUMMY_PROCESSES[0]
+export default async function ResultsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const process = DUMMY_PROCESSES.find(p => p.id === id) || DUMMY_PROCESSES[0]
   const roi = process.asIa.roi
 
   return (
