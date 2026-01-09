@@ -62,9 +62,9 @@ export default async function AsAiPage({ params }: { params: Promise<{ id: strin
             <DollarSign className="w-4 h-4 text-blue-500" /> Costo por Ejecución
           </h3>
           <div className="flex items-end gap-2">
-            <span className="text-2xl font-bold text-foreground">${process.asIs.metrics.costPerExecution}</span>
+            <span className="text-2xl font-bold text-foreground">180.000 CLP</span>
             <ArrowRight className="w-4 h-4 mb-1.5 text-muted-foreground" />
-            <span className="text-2xl font-bold text-green-500">${process.asIa.metrics.costPerExecution}</span>
+            <span className="text-2xl font-bold text-green-500">5.000 CLP</span>
           </div>
           <p className="text-xs text-green-500 font-medium mt-2">Ahorro de ${process.asIa.roi.savings} por caso</p>
         </div>
