@@ -58,7 +58,7 @@ export default async function AsIsPage({ params }: { params: Promise<{ id: strin
           <div className="flex items-center gap-2 text-muted-foreground mb-1">
             <span className="text-xs font-medium uppercase">Costo / Ejecución</span>
           </div>
-          <div className="text-2xl font-bold">${process.asIs.metrics.costPerExecution}</div>
+          <div className="text-2xl font-bold">180.000 CLP</div>
         </div>
       </div>
 
