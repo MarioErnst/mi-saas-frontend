@@ -47,7 +47,7 @@ export function AppSidebar() {
     <Sidebar side="left" variant="sidebar" collapsible="icon">
       <SidebarHeader className="flex items-center gap-2 px-3 pt-2 pb-0 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
         <SidebarTrigger />
-        <div className="ml-1 font-semibold text-primary group-data-[collapsible=icon]:hidden">ASAI</div>
+        <div className="ml-1 font-semibold text-primary group-data-[collapsible=icon]:hidden">COPEC</div>
       </SidebarHeader>
 
       <SidebarContent>
