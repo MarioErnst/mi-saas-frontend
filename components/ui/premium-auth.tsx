@@ -239,7 +239,7 @@ export function AuthForm({ onSuccess, onClose, initialMode = 'login', className 
     }
     fieldsToValidate.forEach(field => {
       const error = validateField(field, formData[field]);
-      if (error) newErrors[field] = error;
+      if (error) newErrors[field as keyof FormErrors] = error;
     });
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
