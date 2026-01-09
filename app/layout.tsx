@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Plataforma",
+  title: "Evolution Labs",
   description: "Plataforma de optimización de procesos",
 };
 
