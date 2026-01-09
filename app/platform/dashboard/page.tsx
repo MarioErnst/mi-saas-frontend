@@ -14,7 +14,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm">
           <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Ahorro Potencial Total</h3>
+            <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Ahorro Potencial Estimado</h3>
             <TrendingUp className="h-4 w-4 text-green-500" />
           </div>
           <div className="text-2xl font-bold">$640,000 / año</div>
@@ -22,15 +22,15 @@ export default function DashboardPage() {
         </div>
         <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm">
           <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Procesos Optimizados</h3>
+            <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Procesos Analizados</h3>
             <Activity className="h-4 w-4 text-blue-500" />
           </div>
-          <div className="text-2xl font-bold">3</div>
-          <p className="text-xs text-muted-foreground mt-1">2 en producción, 1 en análisis</p>
+          <div className="text-2xl font-bold">2</div>
+          <p className="text-xs text-muted-foreground mt-1"></p>
         </div>
         <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm">
           <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Horas Ahorradas</h3>
+            <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Horas Potenciales de Ahorro</h3>
             <Clock className="h-4 w-4 text-purple-500" />
           </div>
           <div className="text-2xl font-bold">1,250 h</div>
@@ -69,7 +69,7 @@ export default function DashboardPage() {
                   </span>
                   {process.status === 'completed' && (
                     <span className="flex items-center gap-1 text-green-500">
-                      <TrendingUp className="w-3 h-3" /> ROI: {process.asIa.roi.timeReductionPercentage}% tiempo
+                      <TrendingUp className="w-3 h-3" /> ROI: {process.asIa.roi.timeReductionPercentage}%
                     </span>
                   )}
                 </div>

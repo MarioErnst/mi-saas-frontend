@@ -279,7 +279,7 @@ export default async function AsAiPage({ params }: { params: Promise<{ id: strin
           <div className="space-y-6">
             <div className="p-6 rounded-xl border bg-card shadow-sm">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-blue-500" /> Licencias y Costos
+                <CreditCard className="w-5 h-5 text-blue-500" /> Licencias
               </h3>
               <ul className="space-y-2">
                 {process.asIa.solutionDetails.licenses.map((lic, i) => (

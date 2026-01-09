@@ -36,7 +36,7 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
         <div className="relative grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20 text-sm font-medium">
-              <Trophy className="w-4 h-4" /> Retorno de Inversión Proyectado
+              <Trophy className="w-4 h-4" /> Ahorro Proyectado
             </div>
             <div className="space-y-1">
               <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
@@ -57,7 +57,7 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
               <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Clock className="w-12 h-12 text-green-500" />
               </div>
-              <p className="text-sm text-gray-400 mb-1">Eficiencia HH</p>
+              <p className="text-sm text-gray-400 mb-1">Eficiencia FTE</p>
               <p className="text-2xl font-bold text-green-400">+{metrics.efficiencyHH?.toFixed(1)}%</p>
               <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                 {(metrics.operationalTime / 60).toFixed(1)}h <span className="text-gray-600">vs</span> {(asIsMetrics.operationalTime / 60).toFixed(1)}h
@@ -81,8 +81,8 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
             </div>
             
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
-              <p className="text-sm text-gray-400 mb-1">Costo Implementación</p>
-              <p className="text-xl font-bold text-white">Bajo Demanda</p>
+              <p className="text-sm text-gray-400 mb-1">ROI</p>
+              <p className="text-xl font-bold text-white">47%</p>
             </div>
           </div>
         </div>
