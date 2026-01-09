@@ -38,11 +38,16 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20 text-sm font-medium">
               <Trophy className="w-4 h-4" /> Retorno de Inversión Proyectado
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
-              ${roi.annualSavings.toLocaleString()}
-              <span className="text-lg md:text-xl font-normal text-muted-foreground ml-2">/ año</span>
-            </h2>
-            <p className="text-muted-foreground max-w-md">
+            <div className="space-y-1">
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+                ${roi.annualSavings.toLocaleString()} USD
+                <span className="text-lg md:text-2xl font-normal text-muted-foreground ml-2">/ año</span>
+              </h2>
+              <p className="text-2xl md:text-3xl font-semibold text-green-400">
+                ≈ ${(roi.annualSavings * 950).toLocaleString('es-CL')} CLP
+              </p>
+            </div>
+            <p className="text-muted-foreground max-w-md text-lg">
               Ahorro anual estimado implementando la arquitectura de agentes IA propuesta, considerando reducción de horas hombre y costos operativos.
             </p>
           </div>
@@ -84,87 +89,63 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
       </div>
 
       {/* Detailed Breakdown */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8">
         <div className="space-y-6">
           <h3 className="text-xl font-semibold flex items-center gap-2">
             <Target className="w-5 h-5" /> Desglose de Impacto
           </h3>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Reducción de Tareas Manuales</span>
-                <span className="font-bold">95%</span>
-              </div>
-              <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                <div className="h-full bg-primary w-[95%]"></div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="space-y-4 p-6 bg-card/50 rounded-xl border">
+               <div className="flex justify-between items-center mb-2">
+                 <span className="font-medium">Reducción de Tareas Manuales</span>
+                 <span className="font-bold text-primary text-xl">95%</span>
+               </div>
+               <div className="h-3 w-full rounded-full bg-muted overflow-hidden">
+                 <div className="h-full bg-primary w-[95%]"></div>
+               </div>
+               <p className="text-sm text-muted-foreground mt-2">Automatización de ingreso de datos y validaciones.</p>
             </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Velocidad de Procesamiento</span>
-                <span className="font-bold">20x Más Rápido</span>
-              </div>
-              <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                <div className="h-full bg-blue-500 w-[92%]"></div>
-              </div>
+
+            <div className="space-y-4 p-6 bg-card/50 rounded-xl border">
+               <div className="flex justify-between items-center mb-2">
+                 <span className="font-medium">Velocidad</span>
+                 <span className="font-bold text-blue-500 text-xl">20x</span>
+               </div>
+               <div className="h-3 w-full rounded-full bg-muted overflow-hidden">
+                 <div className="h-full bg-blue-500 w-[92%]"></div>
+               </div>
+               <p className="text-sm text-muted-foreground mt-2">Reducción drástica en tiempos de ciclo end-to-end.</p>
             </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Reducción de Errores</span>
-                <span className="font-bold">99.9% Precisión</span>
-              </div>
-              <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                <div className="h-full bg-purple-500 w-[99%]"></div>
-              </div>
+
+            <div className="space-y-4 p-6 bg-card/50 rounded-xl border">
+               <div className="flex justify-between items-center mb-2">
+                 <span className="font-medium">Precisión</span>
+                 <span className="font-bold text-purple-500 text-xl">99.9%</span>
+               </div>
+               <div className="h-3 w-full rounded-full bg-muted overflow-hidden">
+                 <div className="h-full bg-purple-500 w-[99%]"></div>
+               </div>
+               <p className="text-sm text-muted-foreground mt-2">Eliminación virtual de errores humanos y reprocesos.</p>
             </div>
           </div>
 
           <div className="p-6 rounded-xl border bg-card mt-6">
-            <h4 className="font-medium mb-2">Próximos Pasos Recomendados</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li className="flex gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></div>
-                Validar propuesta técnica con equipo de IT.
-              </li>
-              <li className="flex gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></div>
-                Definir alcance de piloto (MVP) de 4 semanas.
-              </li>
-              <li className="flex gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></div>
-                Aprobar presupuesto de implementación.
-              </li>
-            </ul>
+            <h4 className="font-medium mb-4">Próximos Pasos Recomendados</h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+               <div className="flex gap-3 items-start">
+                 <div className="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+                 <span className="text-sm text-muted-foreground">Validar propuesta técnica con equipo de IT y Seguridad.</span>
+               </div>
+               <div className="flex gap-3 items-start">
+                 <div className="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+                 <span className="text-sm text-muted-foreground">Definir alcance de piloto (MVP) de 4 semanas.</span>
+               </div>
+               <div className="flex gap-3 items-start">
+                 <div className="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+                 <span className="text-sm text-muted-foreground">Aprobar presupuesto de implementación y roadmap.</span>
+               </div>
+            </div>
           </div>
-        </div>
-
-        {/* Visual Chart Placeholder */}
-        <div className="rounded-xl border bg-card p-6 flex flex-col">
-          <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-            <BarChart3 className="w-5 h-5" /> Comparativa de Costos Acumulados
-          </h3>
-          <div className="flex-1 flex items-end justify-between gap-4 min-h-[300px] px-4 pb-4 border-b border-l relative">
-            {/* Chart Bars Mock */}
-            <div className="w-1/4 bg-muted/30 rounded-t-lg h-[80%] relative group">
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold">AS-IS</div>
-              <div className="w-full h-full bg-red-500/20 rounded-t-lg"></div>
-            </div>
-            <div className="w-1/4 bg-muted/30 rounded-t-lg h-[60%] relative">
-               {/* Month 3 */}
-            </div>
-            <div className="w-1/4 bg-muted/30 rounded-t-lg h-[40%] relative">
-               {/* Month 6 */}
-            </div>
-            <div className="w-1/4 bg-green-500/20 rounded-t-lg h-[15%] relative group">
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-green-500">AS-AI</div>
-            </div>
-            
-            {/* Chart Labels */}
-            <div className="absolute bottom-4 right-8 text-xs text-muted-foreground">Proyección a 12 Meses</div>
-          </div>
-          <p className="text-center text-xs text-muted-foreground mt-4">
-            La línea base (rojo) muestra el costo acumulado actual vs. la solución IA (verde).
-          </p>
         </div>
       </div>
     </div>
