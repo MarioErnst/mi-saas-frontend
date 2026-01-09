@@ -192,7 +192,7 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
         headcount: 1
       },
       roi: {
-        savings: "175.000", // per execution
+        savings: 175.000, // per execution
         timeReductionPercentage: 95.7,
         annualSavings: 520000, // Assuming volume
         breakevenPoint: "2.5 meses"
