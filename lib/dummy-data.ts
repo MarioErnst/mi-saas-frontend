@@ -57,7 +57,7 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
     name: "Onboarding de Clientes Corporativos",
     description: "Proceso actual de alta de nuevos clientes B2B, revisión legal y configuración de cuenta.",
     status: "completed",
-    lastUpdated: "2024-03-10",
+    lastUpdated: "2026-01-05",
     asIs: {
       steps: [
         { 
@@ -192,7 +192,7 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
         headcount: 1
       },
       roi: {
-        savings: 145, // per execution
+        savings: 175.000, // per execution
         timeReductionPercentage: 95.7,
         annualSavings: 520000, // Assuming volume
         breakevenPoint: "2.5 meses"
@@ -211,7 +211,7 @@ export const DUMMY_PROCESSES: ProcessAnalysis[] = [
     name: "Gestión de Reembolsos de Gastos",
     description: "Flujo de aprobación y pago de rendiciones de gastos de empleados.",
     status: "in_progress",
-    lastUpdated: "2024-03-12",
+    lastUpdated: "2026-01-05",
     asIs: {
       steps: [
         { 
