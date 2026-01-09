@@ -66,7 +66,7 @@ export default async function AsAiPage({ params }: { params: Promise<{ id: strin
             <ArrowRight className="w-4 h-4 mb-1.5 text-muted-foreground" />
             <span className="text-2xl font-bold text-green-500">5.000 CLP</span>
           </div>
-          <p className="text-xs text-green-500 font-medium mt-2">Ahorro de ${process.asIa.roi.savings} por caso</p>
+          <p className="text-xs text-green-500 font-medium mt-2">Ahorro de ${process.asIa.roi.savings.toLocaleString('es-CL')} por caso</p>
         </div>
 
         <div className="p-6 rounded-xl border bg-card/50 backdrop-blur relative overflow-hidden group">
